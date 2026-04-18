@@ -96,9 +96,9 @@ async def route_search_models(request):
                        first_image = images[0]
                        # Ensure first image is a dict with a 'url' field
                        if isinstance(first_image, dict) and first_image.get("url"):
-                           image_id = first_image["url"]
-                           # Construct URL with a default width (e.g., 256 or 450)
-                           thumbnail_url = f"{image_base_url}/{image_id}/width=256" # Adjust width as needed
+                           image_path = first_image["url"]
+                           # Construct URL with query params for proper resizing & quality
+                           thumbnail_url = f"{image_base_url}{image_path}?width=256&quality=best"
 
                    # Extract latest version info (Meili response includes 'version' object for the primary version)
                    latest_version_info = hit.get("version", {}) or {} # Ensure it's a dict
